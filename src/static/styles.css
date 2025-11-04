@@ -83,11 +83,11 @@ section h3 {
   color: #444;
 }
 
-/* Bulleted participants list */
+/* Participants list */
 .participants-list {
-  margin: 8px 0 0 18px;
+  margin: 8px 0 0 0;
   padding: 0;
-  list-style: disc;
+  list-style: none;
   max-height: 100px; /* keep cards compact */
   overflow-y: auto;
 }
@@ -100,7 +100,28 @@ section h3 {
   background: rgba(26,35,126,0.03);
   padding: 4px 8px;
   border-radius: 4px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Delete button */
+.delete-participant {
+  background: none;
+  border: none;
+  padding: 4px;
+  margin-left: 8px;
+  cursor: pointer;
+  color: #c62828;
+  font-size: 18px;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.delete-participant:hover {
+  opacity: 1;
+  background: none;
 }
 
 /* Message when there are no participants yet */
