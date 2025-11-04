@@ -4,6 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signup-form");
   const messageDiv = document.getElementById("message");
 
+  // Add a small helper to safely escape user-provided strings before inserting into HTML
+  function escapeHtml(str) {
+    return String(str || "").replace(/[&<>"']/g, (s) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[s])
+    );
+  }
+
   // Function to fetch activities from API
   async function fetchActivities() {
     try {
@@ -20,11 +27,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const spotsLeft = details.max_participants - details.participants.length;
 
+        // Build participants section: show a bulleted list if present, otherwise a friendly message
+        const participants = Array.isArray(details.participants) ? details.participants : [];
+        let participantsHtml = '<div class="participants"><strong>Participants:</strong>';
+        if (participants.length > 0) {
+          participantsHtml += '<ul class="participants-list">';
+          participants.forEach((p) => {
+            participantsHtml += `<li>${escapeHtml(p)}</li>`;
+          });
+          participantsHtml += "</ul>";
+        } else {
+          participantsHtml += '<p class="no-participants">No participants yet</p>';
+        }
+        participantsHtml += "</div>";
+
         activityCard.innerHTML = `
-          <h4>${name}</h4>
-          <p>${details.description}</p>
-          <p><strong>Schedule:</strong> ${details.schedule}</p>
+          <h4>${escapeHtml(name)}</h4>
+          <p>${escapeHtml(details.description)}</p>
+          <p><strong>Schedule:</strong> ${escapeHtml(details.schedule)}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          ${participantsHtml}
         `;
 
         activitiesList.appendChild(activityCard);

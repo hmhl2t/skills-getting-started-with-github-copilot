@@ -74,6 +74,42 @@ section h3 {
   margin-bottom: 8px;
 }
 
+/* Participants block inside each activity card */
+.participants {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed #e0e0e0;
+  font-size: 14px;
+  color: #444;
+}
+
+/* Bulleted participants list */
+.participants-list {
+  margin: 8px 0 0 18px;
+  padding: 0;
+  list-style: disc;
+  max-height: 100px; /* keep cards compact */
+  overflow-y: auto;
+}
+
+/* Individual participant item */
+.participants-list li {
+  margin-bottom: 6px;
+  line-height: 1.3;
+  color: #333;
+  background: rgba(26,35,126,0.03);
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Message when there are no participants yet */
+.no-participants {
+  margin: 8px 0 0;
+  color: #666;
+  font-style: italic;
+}
+
 .form-group {
   margin-bottom: 15px;
 }
